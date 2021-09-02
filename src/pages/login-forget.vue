@@ -1,0 +1,110 @@
+<template>
+  <div class="loginbox">
+    <div class="login">
+      <div @click="exit">
+				<span class="iconfont icon-shanchuguanbiquxiaowubiankuang"></span>
+			</div>
+      <span>手机号:</span>
+      <input
+        type="text"
+        placeholder="输入手机号"
+        v-model="phone"
+        @change="isregister"
+      /><br />
+      <button @click="sentcap">发送验证码</button><br />
+      <span>验证码:</span>
+      <input
+        type="text"
+        placeholder="输入验证码"
+        v-model="captcha"
+        @change="iscap"
+      /><br />
+      <span>密&emsp;码:</span>
+      <input type="password" placeholder="输入密码" v-model="pwd" /><br />
+      <button @click="forgetwpd">确认</button>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+	name:'forget',
+  data() {
+    return {
+      phone: "",
+      pwd: "",
+      captcha: "",
+      exist: 1, //手机是否已经注册
+      istrue: false,
+    };
+  },
+  methods: {
+    exit() {
+      this.$router.back();
+    },
+    isregister() {
+      axios
+        .get(
+          `http://localhost:3000/cellphone/existence/check?phone=${this.phone}`
+        )
+        .then(res => {
+          console.log(res.data);
+					if(res.data.exist == -1){
+						console.log('手机未注册,请先注册')
+						this.exist = res.data.exist
+					}
+        });
+    },
+    iscap() {
+      axios.get(
+        `http://localhost:3000/captcha/verify?phone=${this.phone}&captcha=${this.captcha}`
+      ).then(res =>{
+				console.log(res.data)
+				if(res.data.data == true) this.istruue = true
+				else console.log('验证码错误')
+			}) 
+    },
+    sentcap() {
+      axios
+        .get(`http://localhost:3000/captcha/sent?phone=${this.phone}`)
+        .then((res) => {
+          console.log(res.data);
+					if(res.data.data != true)console.log('请求验证码错误')
+        });
+    },
+    forgetwpd() {
+      if (this.exist != -1 && this.istrue == true) {
+        axios.get(
+					`http://localhost:3000/register/cellphone?phone=${this.phone}
+							&password=${this.pwd}&captcha=${this.captcha}`
+          ).then((res) => {
+						if(res.status == 200)
+            console.log(res.data);
+						else console.log('密码修改失败')
+          });
+      }else{
+				alert('手机未注册或验证码错误')
+			}
+    },
+	}
+}
+</script>
+
+<style scoped>
+.loginbox {
+  height: 88vh;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  position: absolute;
+}
+.login {
+  border: 1px solid #000;
+  width: 300px;
+  margin: 200px auto;
+  padding: 40px;
+}
+.login >div >span{
+	cursor: pointer;
+	font-size: 25px;
+}
+</style>

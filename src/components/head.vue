@@ -16,6 +16,10 @@
           <span class="iconfont icon-denglu"></span>
           <span>未登录</span>
         </a>
+				<a href="javascript:;" v-if="$store.state.iflogin">
+          <img :src="$store.state.user.avatarUrl" />
+          <span>{{$store.state.user.nickname}}</span>
+        </a>
       </div>
     </div>
   </div>
@@ -24,18 +28,13 @@
 <script>
 import axios from 'axios';
 export default {
-  name: "nead",
+  name: "Head",
 	data(){
 		return {
 			searchkey:''
 		}
 	},
 	methods: {
-		seelogin(){
-			axios.get(`http://localhost:3000/user/account&cookie=${encodeURIComponent(sessionStorage.getItem('cookie'))}`).then(res =>{
-				console.log(res)
-			})
-		},
 		forward(){
 			this.$router.forward()
 		},
@@ -87,5 +86,20 @@ input{
   float: right;
   position: relative;
   right: 100px;
+}
+.head-right >div::before{
+	content: '';
+	height: 100%;
+	display: inline-block;
+  vertical-align:middle;
+}
+.head-right img{
+	height: 38px;
+	width: 38px;
+  vertical-align:middle;
+	margin-right: 5px;
+}
+.head-right span{
+  vertical-align:middle;
 }
 </style>

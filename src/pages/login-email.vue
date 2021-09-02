@@ -28,12 +28,20 @@ export default {
     login() {
       axios
         .post(
-          `http://localhost:3000/login?email=${this.user}&password=${this.pwd}`
+          `http://localhost:3000/login?email=${this.user}&password=${encodeURIComponent(this.pwd)}`
         )
         .then((respon) => {
           console.log(respon);
           if (respon.data.code == 502) alert(respon.data.message);
 					if(respon.data.code == 250) alert(respon.data.message);
+					else{
+						this.$store.commit('ADDUSER', respon.data.profile)
+						sessionStorage.setItem('cookie',respon.data.cookie)
+            this.$store.state.iflogin = true;
+        		this.$router.push({
+        		  path: "/",
+        		});
+					}
         });
     },
   },

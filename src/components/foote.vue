@@ -151,7 +151,6 @@ export default {
         this.playing = 1;
         this.$refs.bf.play();
       }
-      console.log(this.playing);
     },
     nextSong() {
 			//下一首

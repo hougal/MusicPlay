@@ -6,6 +6,9 @@ const actions = {
 
 }
 const mutations = {
+	ADDUSER(state, value){
+		state.user = value
+	},
 	GETURL(state, [value, isfm]) {
 		if(isfm === 'isfm'){
 			value.al = {}
@@ -56,6 +59,7 @@ const mutations = {
 }
 const state = {
 	iflogin: false,
+	user:[],
 	url: {
 		"name": "吉祥話",
 		"id": 1824454151,

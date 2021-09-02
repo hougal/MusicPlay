@@ -18,8 +18,16 @@ export default {
 	},
 	methods: {
 		login(){
-			axios.get(`http://localhost:3000/login/cellphone?phone=${this.user}&password=${this.pwd}`).then(respon =>{
-				console.log(respon)
+			axios.get(`http://localhost:3000/login/cellphone?phone=${this.user}&password=${encodeURIComponent(this.pwd)}`)
+				.then(respon =>{
+					if(respon.status == 200){
+					this.$store.commit('ADDUSER', respon.data.profile)
+					sessionStorage.setItem('cookie',respon.data.cookie)
+          this.$store.state.iflogin = true;
+        	this.$router.push({
+        	  path: "/",
+        	});
+				}
 			})
 		}
 	},

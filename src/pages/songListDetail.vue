@@ -48,7 +48,6 @@ export default {
 	mounted() {
 		axios.get(`http://localhost:3000/playlist/detail?id=${this.id}
 			&cookie=${encodeURIComponent(sessionStorage.getItem('cookie'))}`).then(res =>{
-			console.log(res.data)
 				this.list = res.data.playlist.tracks
 				this.$store.commit('GETURLLIST',this.list)
 			})

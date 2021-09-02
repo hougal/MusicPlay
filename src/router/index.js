@@ -2,6 +2,8 @@ import VueRouter from 'vue-router'
 
 // 引入commponent
 import login from '../pages/login'
+import register from '../pages/login-register'
+import forget from '../pages/login-forget'
 import findSong from '../pages/findSong'
 import selfFm from '../pages/selfFm'
 import search from '../pages/search'
@@ -23,6 +25,14 @@ export default new VueRouter({
 		{
 			path:'/login',
 			component: login,
+		},
+		{
+			path:'/login-register',
+			component: register,
+		},
+		{
+			path:'/login-forget',
+			component: forget,
 		},
 		{
 			path:'/findSong',

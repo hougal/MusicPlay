@@ -9,8 +9,8 @@
       <phone v-if="ifphone" />
       <email v-if="ifemail" />
       <qrcode v-if="ifqrcode" />
-      <a href="javascript:;">注册</a>
-      <a href="javascript:;">忘记密码</a>
+      <a href="javascript:;" @click="register">注册</a>
+      <a href="javascript:;" @click="forgetpwd">忘记密码</a>
     </div>
   </div>
 </template>
@@ -30,6 +30,15 @@ export default {
     };
   },
   methods: {
+		register(){
+			this.$router.push({
+				path:'/login-register'
+			})
+		},
+		forgetpwd(){
+			this.$router.push({
+				path:'/login-forget'
+			})},
     cphone() {
       this.ifphone = true;
       this.ifemail = false;
@@ -63,6 +72,7 @@ a:hover {
   border: 1px solid #000;
   width: 300px;
   margin: 200px auto;
+	padding: 40px;
 }
 .login > div {
   border-bottom: 1px #000 solid;

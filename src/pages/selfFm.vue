@@ -37,7 +37,6 @@ export default {
 	methods: {
 		geturl(item) {
       this.$store.commit("GETURL", [item ,'isfm']);
-			console.log(this.$store.state.url)
     },
 		addurl(item){
 			this.$store.commit('ADDURL', [item,'isfm'])

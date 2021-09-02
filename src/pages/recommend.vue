@@ -68,7 +68,6 @@ export default {
       url: "http://localhost:3000/banner",
     }).then((respon) => {
       this.banners1 = respon.data.banners;
-			console.log(this.banners1)
     });
     //banners2 dj
     axios({

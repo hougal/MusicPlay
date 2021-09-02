@@ -89,7 +89,6 @@ export default {
           this.$store.state.url.id
         }&limit=20&offset=${page * 20}`,
       }).then((respon) => {
-        console.log(respon);
         this.comment = respon.data.comments;
       });
     },
@@ -118,7 +117,6 @@ export default {
         method: "GET",
         url: `http://localhost:3000/comment/music?id=${this.$store.state.url.id}&limit=20`,
       }).then((respon) => {
-        console.log(respon);
         this.hotcomment = respon.data.hotComments;
         this.comment = respon.data.comments;
       });
@@ -127,7 +125,6 @@ export default {
         //歌词滚动
         //判断时间是否在上一句歌词和下一句歌词的间隔之间
         for (var i = this.lyrLine; i < this.lyrTime.length; i++) {
-          console.log("111");
           if (
             this.num(this.$store.state.dtime) >= this.num(this.lyrTime[i]) &&
             this.num(this.$store.state.dtime) < this.num(this.lyrTime[i + 1])

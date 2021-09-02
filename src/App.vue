@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import "./style/reset.css";
+import "./assets/reset.css";
 import "./assets/iconfont.css";
 import axios from "axios";
 
